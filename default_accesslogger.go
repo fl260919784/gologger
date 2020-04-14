@@ -1,4 +1,4 @@
-package logger
+package gologger
 
 import (
 	"github.com/fl260919784/gologger/writer"
@@ -11,9 +11,9 @@ var (
 func initializeAccessLogger() {
 	builder := writer.NewSimpleFileWriterDecoratorBuilder()
 	builder.SetFilename("/dev/stdout")
-	w := factory.Build()
+	var w writer.Writer = builder.Build()
 	if w == nil {
-		w = NewNullWriter()
+		w = writer.NewNullWriter()
 	}
 
 	defaultAccessLogger.SetLevel(INFO)

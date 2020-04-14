@@ -19,7 +19,7 @@ type RotateFileWriterDecorator struct {
 	next         Writer
 
 	lock       *sync.Mutex
-	fileWriter *SimpleFileWriter
+	fileWriter *SimpleFileWriterDecorator
 	fileNames  []string //已经rotate的文件名
 
 }
@@ -164,7 +164,7 @@ func (rfb *RotateFileWriterDecoratorBuilder) Build() *RotateFileWriterDecorator 
 		rfb.w = NewNullWriter()
 	}
 
-	sfb := SimpleFileWriterBuilder{}
+	sfb := NewSimpleFileWriterDecoratorBuilder()
 	sfb.SetFilename(filepath.Join(rfb.dirname, rfb.filename))
 	sf := sfb.Build()
 	if sf == nil {

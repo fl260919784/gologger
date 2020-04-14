@@ -6,7 +6,7 @@ import (
 
 type AutoCheckFileWriterDecorator struct {
 	filename   string
-	fileWriter *SimpleFileWriter
+	fileWriter *SimpleFileWriterDecorator
 	next       Writer
 }
 
@@ -67,7 +67,7 @@ func (acfb *AutoCheckFileWriterDecoratorBuilder) Build() *AutoCheckFileWriterDec
 		acfb.w = NewNullWriter()
 	}
 
-	sfb := NewSimpleFileWriterBuilder()
+	sfb := NewSimpleFileWriterDecoratorBuilder()
 	sfb.SetFilename(acfb.filename)
 	sf := sfb.Build()
 	if sf == nil {

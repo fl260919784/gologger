@@ -82,7 +82,7 @@ func (ruwb *RawUdpWriterDecoratorBuilder) Build() *RawUdpWriterDecorator {
 	}
 
 	if ruwb.w == nil {
-		wwb.w = NewNullWriter()
+		ruwb.w = NewNullWriter()
 	}
 
 	writer := &RawUdpWriterDecorator{
@@ -90,7 +90,7 @@ func (ruwb *RawUdpWriterDecoratorBuilder) Build() *RawUdpWriterDecorator {
 		raddr: laddstr,
 		conn:  conn,
 	}
-	writer.Wrap(wwb.w)
+	writer.Wrap(ruwb.w)
 
 	return writer
 }

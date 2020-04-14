@@ -1,4 +1,4 @@
-package logger
+package gologger
 
 import (
 	"github.com/fl260919784/gologger/writer"
@@ -11,7 +11,7 @@ var (
 func initialize() {
 	builder := writer.NewSimpleFileWriterDecoratorBuilder()
 	builder.SetFilename("/dev/stdout")
-	w := builder.Build()
+	var w writer.Writer = builder.Build()
 	if w == nil {
 		w = writer.NewNullWriter()
 	}
