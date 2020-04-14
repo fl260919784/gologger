@@ -115,6 +115,10 @@ func (rf *RotateFileWriterDecorator) load() error {
 	oldfilenames := make([]string, 0, rf.maxFileCount)
 	files, _ := ioutil.ReadDir(rf.dirname)
 	for _, file := range files {
+		if file.Name() == rf.filename {
+			continue
+		}
+
 		if strings.HasPrefix(file.Name(), rf.filename) {
 			oldfilenames = append(oldfilenames, filepath.Base(file.Name()))
 		}

@@ -55,7 +55,7 @@ func (alb *AccessloggerBuilder) buildRemote() writer.WriterDecorator {
 		return nil
 	}
 
-	builder := writer.NewRawUdpWriterBuilder()
+	builder := writer.NewRawUdpWriterDecoratorBuilder()
 	builder.SetRemoteAddr(alb.raddr)
 	builder.SetRemotePort(alb.rport)
 	builder.SetLocalAddr(alb.laddr)
@@ -90,7 +90,7 @@ func (alb *AccessloggerBuilder) buildFile() writer.WriterDecorator {
 	return bufferedfileloger
 }
 
-func (alb *AccessloggerBuilder) Build() Writer {
+func (alb *AccessloggerBuilder) Build() writer.Writer {
 	accesslogger := alb.buildRemote()
 	filelogger := alb.buildFile()
 

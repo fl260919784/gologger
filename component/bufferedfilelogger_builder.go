@@ -27,21 +27,21 @@ func (bfb *BufferedFileLogerBuilder) SetFilename(filename string) {
 	bfb.filename = filename
 }
 
-func (bfb *BufferedFileLogerBuilder) Build() Writer {
+func (bfb *BufferedFileLogerBuilder) Build() writer.Writer {
 	if bfb.bufferSize == 0 || len(bfb.filename) == 0 {
 		return nil
 	}
 
 	var bufferedfileloger writer.WriterDecorator = nil
 
-	bufferBuilder := NewFileBufferWriterDecoratorBuilder()
+	bufferBuilder := writer.NewFileBufferWriterDecoratorBuilder()
 	bufferBuilder.SetBufferSize(bfb.bufferSize)
 	bufferedfileloger = bufferBuilder.Build()
 	if bufferedfileloger == nil {
 		return nil
 	}
 
-	builder := RotateFileWriterBuilder{}
+	builder := writer.NewRotateFileWriterDecoratorBuilder()
 	builder.SetFilename(bfb.filename)
 	builder.SetMaxFileSize(bfb.maxFileSize)
 	builder.SetMaxFileCount(bfb.maxFileCount)
