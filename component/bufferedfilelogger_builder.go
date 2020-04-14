@@ -54,3 +54,7 @@ func (bfb *BufferedFileLogerBuilder) Build() Writer {
 
 	return bufferedfileloger
 }
+
+func NewBufferedFileLogerBuilder() *BufferedFileLogerBuilder {
+	return &BufferedFileLogerBuilder{}
+}

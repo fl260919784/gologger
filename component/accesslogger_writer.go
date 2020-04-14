@@ -102,3 +102,7 @@ func (alb *AccessloggerBuilder) Build() Writer {
 
 	return accesslogger
 }
+
+func NewAccessloggerBuilder() *AccessloggerBuilder {
+	return &AccessloggerBuilder{}
+}
