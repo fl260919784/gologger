@@ -52,7 +52,7 @@ func (rf *RotateFileWriterDecorator) Close() {
 // 识别日志文件是否被删除，是则重建
 // 识别文件大小是否超过上限，是则作切割
 func (rf *RotateFileWriterDecorator) check() error {
-	file, err := os.Stat(rf.filename)
+	file, err := os.Stat(filepath.Join(rf.dirname, rf.filename))
 	if err != nil {
 		if os.IsNotExist(err) {
 			rf.fileWriter.Reopen()
