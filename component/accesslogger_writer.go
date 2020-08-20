@@ -50,7 +50,6 @@ func (alb *AccessloggerBuilder) SetBufferSize(bufferSize int) {
 }
 
 func (alb *AccessloggerBuilder) buildRemote() writer.WriterDecorator {
-
 	if len(alb.raddr) == 0 {
 		return nil
 	}
@@ -61,7 +60,12 @@ func (alb *AccessloggerBuilder) buildRemote() writer.WriterDecorator {
 	builder.SetLocalAddr(alb.laddr)
 	builder.SetLocalPort(alb.lport)
 
-	return builder.Build()
+	w := builder.Build()
+	if w == nil {
+		return nil
+	}
+
+	return w
 }
 
 func (alb *AccessloggerBuilder) buildFile() writer.WriterDecorator {
